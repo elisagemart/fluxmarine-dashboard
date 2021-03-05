@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import logo from './logo.png';
-import {Link} from 'react-router-dom';
-import particle from './particle';
+import {Link, Redirect} from 'react-router-dom';
+import {particle, particleSettings} from './particle';
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {username: "", password: ""};
+        this.state = {username: "", password: "", toDashboard: false};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,29 +20,22 @@ class Login extends Component {
         event.preventDefault();
         try{
             var data = await particle.login({username: this.state.username, password: this.state.password});
-            alert('API call completed on promise resolve: ', data.body.access_token);
             console.log('API call completed on promise resolve: ', data.body.access_token);
+            particleSettings.userToken = data.body.access_token;
+            //redirect to the dashboard component
+            this.setState({toDashboard: true});
         }
         catch (error) {
             console.log('API call completed on promise fail: ', error);
         }
-        /*
-        try {
-            const response = await axiosInstance.post('/token/obtain/', {
-                username: this.state.username,
-                password: this.state.password
-            });
-            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            return data;
-        } catch (error) {
-            throw error;
-        }
-        */
     }
 
     render() {
+        //if the user has successfully logged in, redirect to the dashboard
+        if (this.state.toDashboard === true) {
+            return <Redirect to='/dashboard/' />
+        }
+      
         return (
             <div>
                 <img src={logo} className="App-logo" alt="logo" />

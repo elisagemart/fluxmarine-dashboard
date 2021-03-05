@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import particle from './particle';
+import {particle, particleSettings} from './particle';
 
 
 
@@ -22,8 +22,8 @@ class Signup extends Component{
 
     async handleSubmit(event) {
         event.preventDefault();
+        console.log(particleSettings.userToken);
         try{
-            console.log(particle.clientId);
             var data = await particle.createUser({username: this.state.username, password: this.state.password});
             console.log(data);
             console.log('API call completed on promise resolve: ', data.body);

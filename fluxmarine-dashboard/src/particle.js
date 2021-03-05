@@ -9,5 +9,9 @@ var particleDefaults = {
 
 var particle = new Particle(particleDefaults);
 
+var particleSettings ={
+	userToken: ''
+};
 
-export default particle;
+
+export {particle, particleSettings};
