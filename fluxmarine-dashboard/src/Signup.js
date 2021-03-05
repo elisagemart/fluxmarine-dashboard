@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Particle from 'particle-api-js';
+import particle from './particle';
+
 
 
 class Signup extends Component{
@@ -22,14 +23,24 @@ class Signup extends Component{
     async handleSubmit(event) {
         event.preventDefault();
         try{
-            var particle = new Particle();
-            particle.clientId = "fluxmarine-dashboard-5691";
             console.log(particle.clientId);
             var data = await particle.createUser({username: this.state.username, password: this.state.password});
-            console.log('API call completed on promise resolve: ', data.body.access_token);
+            console.log(data);
+            console.log('API call completed on promise resolve: ', data.body);
+            try{
+                var login = await particle.login({username: this.state.username, password: this.state.password});
+                console.log('Login successful! access_token:', login.access_token);
+            }
+            catch(error){
+                console.log(login);
+                console.log(error);
+                console.log('API call completed on promise fail: ', error.errorDescription);
+            }
         }
         catch (error) {
-            console.log('API call completed on promise fail: ', error);
+            console.log(data);
+            console.log(error);
+            console.log('API call completed on promise fail: ', error.errorDescription);
         }
         /*
         try {

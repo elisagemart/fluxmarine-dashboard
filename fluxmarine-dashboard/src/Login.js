@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from './logo.png';
-import Particle from 'particle-api-js';
 import {Link} from 'react-router-dom';
+import particle from './particle';
 
 class Login extends Component {
     constructor(props) {
@@ -19,7 +19,6 @@ class Login extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         try{
-            var particle = new Particle();
             var data = await particle.login({username: this.state.username, password: this.state.password});
             alert('API call completed on promise resolve: ', data.body.access_token);
             console.log('API call completed on promise resolve: ', data.body.access_token);
