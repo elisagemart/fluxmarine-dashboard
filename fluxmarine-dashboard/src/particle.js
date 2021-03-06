@@ -10,7 +10,8 @@ var particleDefaults = {
 var particle = new Particle(particleDefaults);
 
 var particleSettings ={
-	userToken: ''
+	userToken: '',
+	username: ''
 };
 
 

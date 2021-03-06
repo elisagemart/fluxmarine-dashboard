@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from './logo.png';
 import {Link, Redirect} from 'react-router-dom';
 import {particle, particleSettings} from './particle';
+import './Login.css';
 
 class Login extends Component {
     constructor(props) {
@@ -10,10 +11,18 @@ class Login extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateForm = this.validateForm.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    //determine if the user has entered valid information in the form
+    validateForm(){
+        let validUsername = this.state.username !== "";
+        let validPassword = this.state.password !== "";
+        return validUsername && validPassword;
     }
 
     async handleSubmit(event) {
@@ -22,6 +31,7 @@ class Login extends Component {
             var data = await particle.login({username: this.state.username, password: this.state.password});
             console.log('API call completed on promise resolve: ', data.body.access_token);
             particleSettings.userToken = data.body.access_token;
+            particleSettings.username = this.state.username;
             //redirect to the dashboard component
             this.setState({toDashboard: true});
         }
@@ -37,23 +47,26 @@ class Login extends Component {
         }
       
         return (
-            <div>
+        <div id="login_page">
+            <div id="login">
                 <img src={logo} className="App-logo" alt="logo" />
+                <h2>Login</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
+                    <div className="input-class">
+                        <label>Email Address</label>
+                        <input name="username" type="text" id="username" value={this.state.username} onChange={this.handleChange}/>
+                    </div>
+                    <div className="input-class">
+                        <label>Password</label>
+                        <input name="password" type="password" id="password" value={this.state.password} onChange={this.handleChange}/>
+                    </div>
+                    <input type="submit" value="Login"/>
                 </form>
                 <Link to={"/signup/"}>
                         <button>Create Account</button>
                 </Link>
             </div>
+        </div>
         )
     }
 }

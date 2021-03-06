@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import ClaimDevice from "./ClaimDevice";
 import {particle, particleSettings} from './particle';
+import './Dashboard.css';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -47,7 +48,10 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-               Dashboard
+               <div id="header">
+                   <p className="headerEle">{particleSettings.username}</p>
+                   <button className="headerEle">Logout</button>
+               </div>
                <button onClick={this.toggleClaimPopup.bind(this)}>Claim Device</button>  
                {this.state.showClaimPopup ?  
                 <ClaimDevice closePopup={this.toggleClaimPopup.bind(this)}/>  

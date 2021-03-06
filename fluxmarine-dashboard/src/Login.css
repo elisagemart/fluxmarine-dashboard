@@ -1,0 +1,58 @@
+
+#login_page{
+    text-align: center;
+}
+
+#login{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 15vh;
+}
+
+#signup-page{
+    text-align: center;
+}
+
+#signup{
+    margin-top: 15vh;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+input{
+    display: inline-block;
+    width:100%;
+    font-family: 'Montserrat';
+    font-size: 14px;
+    padding: 5px;
+}
+
+input[type=submit]{
+    margin-top: 30px;
+    margin-left: 0.6vw;
+}
+
+.input-class{
+    text-align: left;
+    margin-top: 22px;
+}
+
+label{
+    margin-top: 10px;
+}
+
+#warning{
+    color: red;
+    font-size: 12px;
+}
+
+form{
+    margin:auto;
+    margin-top: 40px;
+    width: 30vw;
+}
+
+button{
+    font-family: 'Montserrat';
+    margin: 15px;
+}

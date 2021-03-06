@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {particle, particleSettings} from './particle';
-
+import './Login.css';
+import logo from './logo.png';
 
 
 class Signup extends Component{
@@ -9,11 +10,23 @@ class Signup extends Component{
         this.state = {
             username: "",
             password: "",
-            errors:""
+            confirmPassword: "",
+            errors:"",
+            validForm: false
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+    }
+
+    //check if the inputs given in the form are valid
+    //TODO: add check for email
+    validateForm(){
+        var validUsername = this.state.username !== "";
+        var validPassword = this.state.password !== "" && this.state.password === this.state.confirmPassword;
+        console.log(this.state.username, this.state.password, this.state.confirmPassword, validPassword, validUsername);
+        return validUsername && validPassword;
     }
 
     handleChange(event) {
@@ -42,39 +55,41 @@ class Signup extends Component{
             console.log(error);
             console.log('API call completed on promise fail: ', error.errorDescription);
         }
-        /*
-        try {
-            const response = await axiosInstance.post('/user/create/', {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            });
-            return response;
-        } catch (error) {
-            console.log(error.stack);
-            this.setState({
-                errors:error.response.data
-            });
-        }
-        */
     }
 
     render() {
         return (
-            <div>
+            <div id="signup-page">
+                <div id="signup">
+                <img src={logo} className="App-logo" alt="logo" />
+                <h2>Create Account</h2>
                 <form onSubmit={this.handleSubmit}>
+                    <div class="input-class">
                     <label>
-                        Username:
+                        Email Address
                         <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
                         { this.state.errors.username ? this.state.errors.username : null}
                     </label>
+                    </div>
+                    <div class="input-class">
                     <label>
-                        Password:
+                        Password
                         <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
                         { this.state.errors.password ? this.state.errors.password : null}
                     </label>
-                    <input type="submit" value="Submit"/>
+                    </div>
+                    <div class="input-class">
+                    <label>
+                        Confirm Password
+                        <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.handleChange}/>
+                        <p id="warning">
+                        { (this.state.confirmPassword !== "" && this.state.confirmPassword !== this.state.password) ? "Make sure your passwords match!" : null}
+                        </p>
+                    </label>
+                    </div>
+                    <input type="submit" value="Create Account" disabled={!this.validateForm()}/>
                 </form>
+                </div>
             </div>
         )
     }

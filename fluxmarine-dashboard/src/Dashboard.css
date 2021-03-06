@@ -1,0 +1,10 @@
+#header{
+    width: 100%;
+    text-align: right;
+    background-color: #005ed3;
+    color: white;
+}
+
+.headerEle{
+    display: inline;
+}
