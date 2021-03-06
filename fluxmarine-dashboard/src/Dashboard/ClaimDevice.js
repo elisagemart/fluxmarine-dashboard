@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {particle, particleSettings} from './particle';
+import {particle, particleSettings} from '../particle';
+import './Dashboard.css';
 
 class ClaimDevice extends React.Component {  
     constructor(props) {
@@ -20,6 +21,8 @@ class ClaimDevice extends React.Component {
             console.log(particleSettings.userToken);
             var data = await particle.claimDevice({deviceId: this.state.deviceID, auth: particleSettings.userToken});
             console.log('API call completed on promise resolve: ', data.body);
+            this.props.closePopup();
+            this.props.getUserDevices();
         }
         catch (error) {
             console.log('API call completed on promise fail: ', error);
@@ -27,8 +30,8 @@ class ClaimDevice extends React.Component {
     }
     render() {  
         return (  
-            <div className='popup'>  
-                <div className='popup\_inner'>  
+            <div className='modal'>  
+                <div className='modal-content'>  
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Device ID:

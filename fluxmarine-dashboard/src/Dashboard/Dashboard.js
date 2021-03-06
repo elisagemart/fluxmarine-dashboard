@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Link, Redirect} from 'react-router-dom';
-import ClaimDevice from "../ClaimDevice";
+import ClaimDevice from "./ClaimDevice";
 import {particle, particleSettings} from '../particle';
 import { Grid, Row, Col } from "react-flexbox-grid";
 import Devices from './Devices';
@@ -10,7 +10,6 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-                        showClaimPopup: false, 
                         toLogin: false,
                      }; 
 
@@ -31,18 +30,10 @@ class Dashboard extends Component {
         catch(error){
             console.log(error);
         }
-    }
-
-    //toggle visibility of the 'Claim Device' popup
-    toggleClaimPopup() {  
-        this.setState({  
-             showClaimPopup: !this.state.showClaimPopup  
-        });
-    }  
-
+    } 
 
     render() {
-        if (this.state.toLogin === true) {
+        if (this.state.toLogin === true || particleSettings.userToken === "") {
             return <Redirect to='/' />
         }
 
