@@ -39,6 +39,7 @@
 
 .detail-column{
     background-color: #f4f4f4;
+    position: relative;
 }
 
 .device-column{
@@ -86,4 +87,11 @@
       margin-top: 25px;
       margin-left: auto;
       margin-right: auto;
+  }
+
+  #map-div{
+    width: 100%;
+      height: 60vh;
+      position: absolute;
+      bottom: 0;
   }
