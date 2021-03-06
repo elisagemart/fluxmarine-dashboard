@@ -9,9 +9,12 @@ var particleDefaults = {
 
 var particle = new Particle(particleDefaults);
 
+//data stored in local browser to handle credentials for this session
+//TODO: cookies?
 var particleSettings ={
 	userToken: '',
-	username: ''
+	username: '',
+	password: ''
 };
 
 

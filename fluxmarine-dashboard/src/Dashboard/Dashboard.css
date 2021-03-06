@@ -1,0 +1,64 @@
+#header{
+    width: 100%;
+    text-align: right;
+    background-color: #005ed3;
+    color: white;
+    height: 8vh;
+}
+
+.headerEle{
+    display: inline;
+}
+
+.dashboard-main{
+    display: flex;
+    height: 92vh;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nav-column {
+    background-color: #717273;
+    overflow: hidden;
+  }
+  
+  
+  .content-column {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+
+.devices-main{
+    display: flex;
+    overflow: hidden;
+    height: 92vh;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.detail-column{
+    background-color: #f4f4f4;
+}
+
+.device-column{
+    padding-left: 0;
+    padding-right: 0;
+    vertical-align: top;
+}
+
+.device-entry{
+    width:100%;
+    vertical-align: top;
+    padding: 10px;
+    border-bottom: #f4f4f4 5px solid;
+}
+
+.device-entry-selected{
+    background-color: #f4f4f4;
+}
+
+.device-entry:hover{
+    background-color: #f4f4f4;
+}

@@ -32,6 +32,7 @@ class Login extends Component {
             console.log('API call completed on promise resolve: ', data.body.access_token);
             particleSettings.userToken = data.body.access_token;
             particleSettings.username = this.state.username;
+            particleSettings.password = this.state.password;
             //redirect to the dashboard component
             this.setState({toDashboard: true});
         }
