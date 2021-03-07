@@ -10,6 +10,13 @@
     display: inline;
 }
 
+.headerLogo{
+    margin-top: 1vh;
+    margin-left: 20px;
+    float: left;
+    height: 6vh;
+}
+
 .dashboard-main{
     display: flex;
     height: 92vh;
@@ -19,9 +26,28 @@
 }
 
 .nav-column {
-    background-color: #717273;
+    background-color: #333336;
     overflow: hidden;
   }
+
+.navButton{
+    padding: 0px;
+    margin: 15px;
+    border: none;
+    outline: none;
+    background: none;
+    transition-duration: 0.3s;
+}
+
+.navButton:hover{
+    opacity: 30%;
+}
+
+.navImage{
+    width: 100%;
+}
+
+
   
   
   .content-column {

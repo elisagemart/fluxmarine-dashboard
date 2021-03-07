@@ -18,22 +18,44 @@ class Devices extends Component {
     }
 
     //return an object representing the currently selected device
-    getCurrentDevice(){
-        for(var i = 0; i < this.state.userDevices.length; i++){
+    getCurrentDevice() {
+        for (var i = 0; i < this.state.userDevices.length; i++) {
             let device = this.state.userDevices[i];
-            if (device.id === this.state.selectedDevice){
+            if (device.id === this.state.selectedDevice) {
                 return device;
             }
         }
         return null;
     }
 
+    getAllDevices(){
+        return this.state.userDevices;
+    }
+
     //get a list of devices for the current user
     async getUserDevices() {
         this.setState({ isFetchingUserDevices: true });
-        var res = await particle.listDevices({ auth: particleSettings.userToken });
-        console.log(res);
-        this.setState({ userDevices: res.body, isFetchingUserDevices: false });
+        try {
+            var res = await particle.listDevices({ auth: particleSettings.userToken });
+            var devices = res.body;
+            for(var i = 0; i < devices.length; i++){
+                try{
+                    var locationData = await particle.getProductDeviceLocations({
+                        deviceId: devices[i].id,
+                        auth: particleSettings.userToken,
+                        product: "tracker-one-test-device-12573"
+                    });
+                    devices[i].coordinates = locationData.body.location.geometry.coordinates;
+                }
+                catch(error){
+                    console.log(error);
+                }
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+        this.setState({ userDevices: devices, isFetchingUserDevices: false });
     }
 
     //start fetching device data when the page loads
@@ -81,6 +103,7 @@ class Devices extends Component {
                             this.state.userDevices.map(device => {
                                 return (
                                     <DeviceListItem
+                                        key={device.id}
                                         device={device}
                                         selected={() => this.selected(device)}
                                         selectMe={() => this.selectMe(device)}
@@ -93,7 +116,7 @@ class Devices extends Component {
                     </Col>
 
                     <Col className="detail-column" xs>
-                        <DeviceDetail devices={this.state.devices} currentDevice={this.getCurrentDevice()}/>
+                        <DeviceDetail devices={this.getAllDevices()} currentDevice={this.getCurrentDevice()} />
                     </Col>
                 </Grid>
             </div>

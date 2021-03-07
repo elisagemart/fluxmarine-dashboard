@@ -17,13 +17,14 @@ class DeviceDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentDevice: props.currentDevice,
+            devices: props.devices
         };
     }
 
     render() {
         //if no currently selected device, return nothing
         if (this.props.currentDevice === null) {
-            console.log("NULL");
             return ("");
         }
         //else render detail page
@@ -36,6 +37,8 @@ class DeviceDetail extends Component {
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
+                        currentDevice={this.props.currentDevice}
+                        devices={this.props.devices}
                     />
                 </div>
             </div>
