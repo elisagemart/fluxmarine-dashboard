@@ -2,8 +2,8 @@ import Particle from 'particle-api-js';
 
 var particleDefaults = {
 	baseUrl: 'https://api.particle.io',
-	clientSecret: 'c39838c49fda47547835a66a8765cc08470dedc9',
-	clientId: 'fluxmarine-dashboard-5691',
+	clientSecret: process.env.REACT_APP_PARTICLE_SECRET,
+	clientId: process.env.REACT_APP_PARTICLE_CLIENT_ID,
 	tokenDuration: 7776000 // 90 days
 };
 

@@ -43,7 +43,7 @@ class Devices extends Component {
                     var locationData = await particle.getProductDeviceLocations({
                         deviceId: devices[i].id,
                         auth: particleSettings.userToken,
-                        product: "tracker-one-test-device-12573"
+                        product: process.env.REACT_APP_PARTICLE_PRODUCT_NAME
                     });
                     devices[i].coordinates = locationData.body.location.geometry.coordinates;
                 }
@@ -129,7 +129,11 @@ class DeviceListItem extends Component {
     render() {
         return (
             <div className={this.props.selected() ? "device-entry device-entry-selected" : "device-entry"} onClick={this.props.selectMe}>
-                <h4>{this.props.device.id}</h4>
+                <div>
+                    <span className={this.props.device.online ? "circle online" : "circle offline"}></span>
+                    <h4 className="deviceName">{this.props.device.name}</h4>
+                </div>
+               
             </div>
         );
     }

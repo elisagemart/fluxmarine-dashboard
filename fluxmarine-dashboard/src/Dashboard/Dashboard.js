@@ -48,8 +48,8 @@ class Dashboard extends Component {
                 </div>
                 <Grid fluid className="dashboard-main">
                     <Col className="nav-column" md={1} lg={1}>
-                        <NavButton image={boat} />
-                        <NavButton image={warning} />
+                        <NavButton image={boat} text="Devices"/>
+                        <NavButton image={warning} text="Alerts"/>
                     </Col>
 
                     <Col className="content-column" xs>
@@ -73,6 +73,7 @@ class NavButton extends Component {
         return (
             <button className="navButton">
                 <img className="navImage" src={this.props.image} />
+                <p className="navLabel">{this.props.text}</p>
             </button>
         )
     }

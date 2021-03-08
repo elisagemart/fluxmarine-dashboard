@@ -36,7 +36,8 @@
     border: none;
     outline: none;
     background: none;
-    transition-duration: 0.3s;
+    color: #C8CBCC;
+    transition-duration: 0.25s;
 }
 
 .navButton:hover{
@@ -45,6 +46,10 @@
 
 .navImage{
     width: 100%;
+}
+
+.navLabel{
+    margin:0px;
 }
 
 
@@ -79,6 +84,7 @@
     vertical-align: top;
     padding: 10px;
     border-bottom: #f4f4f4 5px solid;
+    transition-duration: 0.3s;
 }
 
 .device-entry-selected{
@@ -120,4 +126,25 @@
       height: 60vh;
       position: absolute;
       bottom: 0;
+  }
+
+  .circle{
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .online{
+    background-color: #005ed3;
+  }
+
+  .offline{
+    background-color: #717273;
+  }
+
+  .deviceName{
+      display: inline-block;
+      margin: 0px;
   }
