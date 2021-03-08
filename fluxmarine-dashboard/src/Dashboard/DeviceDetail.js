@@ -30,7 +30,8 @@ class DeviceDetail extends Component {
         //else render detail page
         return (
             <div id="detail-page">
-                <h1>{this.props.currentDevice.id}</h1>
+                <h1>{this.props.currentDevice.name}</h1>
+                <h3>{this.props.currentDevice.id}</h3>
                 <div id="map-div">
                     <MapWrapped
                         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}

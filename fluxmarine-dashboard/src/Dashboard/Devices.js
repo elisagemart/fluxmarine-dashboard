@@ -4,6 +4,7 @@ import ClaimDevice from "./ClaimDevice";
 import DeviceDetail from "./DeviceDetail";
 import { particle, particleSettings } from '../particle';
 import { Grid, Row, Col } from "react-flexbox-grid";
+import settingsIcon from './settings.png';
 import './Dashboard.css';
 
 class Devices extends Component {
@@ -28,7 +29,7 @@ class Devices extends Component {
         return null;
     }
 
-    getAllDevices(){
+    getAllDevices() {
         return this.state.userDevices;
     }
 
@@ -38,8 +39,8 @@ class Devices extends Component {
         try {
             var res = await particle.listDevices({ auth: particleSettings.userToken });
             var devices = res.body;
-            for(var i = 0; i < devices.length; i++){
-                try{
+            for (var i = 0; i < devices.length; i++) {
+                try {
                     var locationData = await particle.getProductDeviceLocations({
                         deviceId: devices[i].id,
                         auth: particleSettings.userToken,
@@ -47,7 +48,7 @@ class Devices extends Component {
                     });
                     devices[i].coordinates = locationData.body.location.geometry.coordinates;
                 }
-                catch(error){
+                catch (error) {
                     console.log(error);
                 }
             }
@@ -133,7 +134,19 @@ class DeviceListItem extends Component {
                     <span className={this.props.device.online ? "circle online" : "circle offline"}></span>
                     <h4 className="deviceName">{this.props.device.name}</h4>
                 </div>
-               
+                <BatteryIndicator batteryLevel={70}/>
+            </div>
+        );
+    }
+}
+
+class BatteryIndicator extends Component {
+    render() {
+        return (
+            <div class="batteryContainer">
+                <div class="batteryOuter"><div id="batteryLevel" style={{width: this.props.batteryLevel + "%"}}></div></div>
+                <div class="batteryBump"></div>
+                <p className="batteryLabel">{this.props.batteryLevel}%</p>
             </div>
         );
     }
